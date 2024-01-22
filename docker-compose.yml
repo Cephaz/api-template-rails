@@ -25,5 +25,17 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
 
+  ui:
+    build:
+      context: ./ui
+    ports:
+      - "8080:8080"
+    environment:
+      - VITE_API_URL=http://app:3000/api
+    volumes:
+      - ./ui:/ui
+    depends_on:
+      - app
+
 volumes:
   postgres:
